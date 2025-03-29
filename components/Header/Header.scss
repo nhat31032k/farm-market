@@ -1,0 +1,25 @@
+.header {
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed; // Thay đổi ở đây
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  width: 100%;
+  transition: all 0.3s ease;
+
+  // Thêm padding cho body để tránh bị header che nội dung
+  &+* {
+    padding-top: 60px; // Bằng chiều cao header
+  }
+
+  .logo {
+    color: #4CAF50;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: var(--primary-dark);
+    }
+  }
+}

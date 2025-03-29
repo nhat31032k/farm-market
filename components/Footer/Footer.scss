@@ -1,0 +1,130 @@
+.app-footer {
+    background-color: #4CAF50;
+    color: white;
+    padding: 40px 0 20px;
+    margin-top: 60px;
+
+    .footer-title {
+        color: white !important;
+        margin-bottom: 16px;
+        font-weight: 500;
+    }
+
+    .footer-text {
+        color: rgba(255, 255, 255, 0.8);
+        display: block;
+        margin-bottom: 16px;
+    }
+
+    .footer-social {
+        margin-top: 16px;
+
+        a {
+            color: white;
+            font-size: 18px;
+            transition: color 0.3s;
+
+            &:hover {
+                color: var(--accent-color);
+            }
+        }
+    }
+
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            margin-bottom: 8px;
+
+            a {
+                color: rgba(255, 255, 255, 0.8);
+                transition: color 0.3s;
+
+                &:hover {
+                    color: white;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .footer-contact {
+        p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+
+            .anticon {
+                margin-right: 8px;
+                // color: var(--accent-color);
+            }
+        }
+    }
+
+    .footer-newsletter {
+        display: flex;
+        margin-top: 16px;
+
+        .newsletter-input {
+            flex-grow: 1;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+
+        .newsletter-button {
+            background-color: var(--accent-color);
+            color: #333;
+            border: none;
+            padding: 0 16px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: #ffd54f;
+            }
+        }
+    }
+
+    .footer-divider {
+        background-color: rgba(255, 255, 255, 0.1);
+        margin: 24px 0;
+    }
+
+    .footer-copyright {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    @media (max-width: 768px) {
+        text-align: center;
+
+        .footer-social {
+            justify-content: center;
+        }
+
+        .footer-contact {
+            p {
+                justify-content: center;
+            }
+        }
+
+        .footer-newsletter {
+            flex-direction: column;
+
+            .newsletter-input {
+                border-radius: 4px;
+                margin-bottom: 8px;
+            }
+
+            .newsletter-button {
+                border-radius: 4px;
+            }
+        }
+    }
+}
