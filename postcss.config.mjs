@@ -2,11 +2,11 @@ const config = {
   theme: {
     extend: {
       colors: {
-        primary: "#4CAF50",
-        secondary: "#8BC34A",
-        accent: "#FFC107",
-        dark: "#2E7D32",
-        light: "#F1F8E9",
+        primary: "#e63946",
+        secondary: "#f1faee",
+        accent: "#a8dadc",
+        dark: "#1d3557",
+        light: "#f8f9fa",
       },
       animation: {
         "fade-in": "fadeIn 0.5s ease-in-out",

@@ -10,6 +10,7 @@ const nextConfig = {
   images: {
     domains: ['localhost', 'your-production-domain.com'],
   },
+  devIndicators: false
 }
 
 module.exports = nextConfig

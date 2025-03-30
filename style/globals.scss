@@ -4,25 +4,143 @@
 @import 'mixins';
 @import 'animations';
 
-@theme {
-  --primary-color: #4CAF50;
-  // $primary-dark: #2E7D32;
-  // $primary-light: #C8E6C9;
+:root {
+  --primary-color: #e63946;
+  --secondary-color: #f1faee;
+  --accent-color: #a8dadc;
+  --dark-color: #1d3557;
+  --light-color: #f8f9fa;
+  --scrollbar-width: 10px;
+}
 
-  // $secondary-color: #8BC34A;
-  // $secondary-dark: #689F38;
-  // $secondary-light: #DCEDC8;
+html {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE và Edge */
 
-  // $accent-color: #FFC107;
-  // $text-color: #333333;
-  // $text-light: #757575;
-  // $border-color: #e0e0e0;
+  /* Tắt scrollbar trên WebKit (Chrome, Safari) */
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+    background: transparent;
+  }
+}
+
+::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-width);
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background: darken(#e63946, 10%);
+  }
+}
+
+/* Handle khi đang active (đang click) */
+::-webkit-scrollbar-thumb:active {
+  background: darken(#e63946, 15%);
+}
+
+/* Corner (góc giữa scrollbar dọc và ngang) */
+::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: #f5f5f5;
-  color: #333;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  /* Scroll mượt trên iOS */
+}
+
+/* Tùy chỉnh scrollbar cho các phần tử cụ thể */
+/* Tùy chọn: Hiển thị scrollbar khi hover (nếu muốn) */
+.scrollbar-on-hover {
+  overflow: hidden;
+
+  &:hover {
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      display: block;
+      width: 8px;
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+    }
+  }
+}
+
+/* Đảm bảo các phần tử có thể scroll */
+.scroll-container {
+  overflow: auto;
+  -ms-overflow-style: none;
+  /* IE và Edge */
+  scrollbar-width: none;
+  /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Hiệu ứng khi scroll (nếu cần) */
+.scroll-content {
+  scroll-snap-type: y mandatory;
+
+  >section {
+    scroll-snap-align: start;
+  }
+}
+
+/* Animation khi scroll */
+@keyframes fadeInOnScroll {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Lớp áp dụng khi element xuất hiện trong viewport */
+.scroll-animate {
+  animation: fadeInOnScroll 0.6s ease forwards;
+}
+
+/* Hiệu ứng parallax cơ bản */
+.parallax {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Tùy chỉnh cho Firefox */
+@-moz-document url-prefix() {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) rgba(0, 0, 0, 0.05);
+  }
 }
 
 // Global animations

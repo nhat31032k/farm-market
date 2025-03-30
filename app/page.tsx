@@ -1,105 +1,206 @@
+"use client";
+import { useRef } from 'react';
+import './page.scss';
+// import { Button } from '@/components/core/Button'
+// import { useAuth } from '@/contexts/AuthContext'
+import Link from 'next/link';
+import { Carousel, Rate } from 'antd';
+import { useScroll, motion, useTransform } from 'framer-motion';
+import Button from '@/components/core/Button/Button';
 
-import Image from "next/image";
+const HomePage = () => {
+  // const { user } = useAuth()
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  })
+  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
 
-export default function Home() {
+  // Dữ liệu đánh giá khách hàng
+  const testimonials = [
+    {
+      id: 1,
+      name: "Nguyễn Thị Hồng",
+      rating: 5,
+      comment: "Dâu tây ngon ngọt, tươi mới, giao hàng nhanh chóng. Tôi rất hài lòng!",
+      avatar: "/images/avatar1.jpg"
+    },
+    {
+      id: 2,
+      name: "Trần Văn Nam",
+      rating: 4,
+      comment: "Chất lượng tốt, giá cả hợp lý. Sẽ ủng hộ cửa hàng dài lâu.",
+      avatar: "/images/avatar2.jpg"
+    },
+    {
+      id: 3,
+      name: "Lê Thị Mai",
+      rating: 5,
+      comment: "Dâu đẹp như hình, ăn rất thơm ngon. Cảm ơn shop!",
+      avatar: "/images/avatar3.jpg"
+    }
+  ]
+
+  // Dữ liệu hình ảnh slide
+  const images = [
+    "/images/strawberry1.jpg",
+    "/images/strawberry2.jpg",
+    "/images/strawberry3.jpg",
+    "/images/strawberry4.jpg"
+  ]
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside  list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="home-page" ref={sectionRef}>
+      {/* Hero Section với video background */}
+      <section className="hero-section">
+        {/* Video background */}
+        <div className="video-background">
+          <video autoPlay loop muted playsInline>
+            <source src="/video/dautay.webm" type="video/webm" />
+            <source src="/video/dautay.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div className="video-overlay"></div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        {/* Nội dung hero với hiệu ứng parallax */}
+        <motion.div
+          className="hero-content"
+          style={{ y: yBg }}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            Dâu Tây Đà Lạt Tươi Ngon
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Hương vị thiên nhiên, chất lượng vượt trội
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            {/* {user ? (
+              <Link href="/order">
+                <Button type="primary" size="large">Đặt hàng ngay</Button>
+              </Link>
+            ) : (
+              <Link href="/login">
+                <Button type="primary" size="large">Đăng nhập để đặt hàng</Button>
+              </Link>
+            )} */}
+            <Link href="/login">
+              <Button type="primary" size="large">Đăng nhập để đặt hàng</Button>
+            </Link>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* About Section */}
+      <section className="about-section">
+        <div className="container">
+          <h2>Về Dâu Tây Đà Lạt</h2>
+          <div className="about-content">
+            <div className="about-text">
+              <p>
+                Dâu tây Đà Lạt được trồng trên vùng đất đỏ bazan màu mỡ, với khí hậu mát mẻ quanh năm tạo nên hương vị đặc trưng khó quên.
+              </p>
+              <p>
+                Chúng tôi cam kết mang đến cho khách hàng những trái dâu tươi ngon nhất, không chất bảo quản, đảm bảo an toàn vệ sinh thực phẩm.
+              </p>
+              <ul>
+                <li>100% tự nhiên</li>
+                <li>Không chất bảo quản</li>
+                <li>Thu hoạch hàng ngày</li>
+                <li>Giao hàng tận nơi</li>
+              </ul>
+            </div>
+            <div className="about-image">
+              <Carousel autoplay effect="fade">
+                {images.map((img, index) => (
+                  <div key={index}>
+                    <img src={img} alt={`Dâu tây Đà Lạt ${index + 1}`} />
+                  </div>
+                ))}
+              </Carousel>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Feature Section */}
+      <section className="feature-section">
+        <div className="container">
+          <h2>Tại sao chọn chúng tôi?</h2>
+          <div className="features">
+            <motion.div
+              className="feature"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <div className="feature-icon">🌱</div>
+              <h3>Canh tác hữu cơ</h3>
+              <p>Phương pháp trồng tự nhiên, không thuốc trừ sâu</p>
+            </motion.div>
+            <motion.div
+              className="feature"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <div className="feature-icon">🏆</div>
+              <h3>Chất lượng cao</h3>
+              <p>Dâu tây được chọn lọc kỹ càng trước khi đến tay khách hàng</p>
+            </motion.div>
+            <motion.div
+              className="feature"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <div className="feature-icon">🚚</div>
+              <h3>Giao hàng nhanh</h3>
+              <p>Giao hàng trong ngày tại Đà Lạt, 1-2 ngày với các tỉnh khác</p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonial Section */}
+      <section className="testimonial-section">
+        <div className="container">
+          <h2>Đánh giá của khách hàng</h2>
+          <div className="testimonials">
+            {testimonials.map((testimonial) => (
+              <motion.div
+                key={testimonial.id}
+                className="testimonial-card"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <div className="avatar">
+                  <img src={testimonial.avatar} alt={testimonial.name} />
+                </div>
+                <div className="content">
+                  <h4>{testimonial.name}</h4>
+                  <Rate disabled defaultValue={testimonial.rating} />
+                  <p>{testimonial.comment}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
-  );
+  )
 }
+
+export default HomePage
